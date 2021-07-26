@@ -49,7 +49,7 @@ Actividades extra:
 
 ### Documentacion
  - Esta aplicacion utiliza [Django 3.2](https://docs.djangoproject.com/en/3.2/releases/3.2/).
- - Se recomienda seguir la [hoja de estilos](https://github.com/HackSoftware/Django-Styleguide) de HackSoft
+ - Se recomienda seguir la [hoja de estilos](https://github.com/HackSoftware/Django-Styleguide) de HackSoft.
 
 ### ¿Como enviar tu trabajo?
 
