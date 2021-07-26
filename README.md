@@ -16,7 +16,7 @@ requerimientos.
 * Cuenta en github
 
 ### Instalacion de entorno
-**⚠ Necesitar crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#Como-enviar-tu-trabajo?)
+**⚠ Necesitar crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#¿Como-enviar-tu-trabajo?)
 ```sh
 virtualenv -p python3 env
 source env/bin/activate
