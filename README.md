@@ -16,7 +16,7 @@ requerimientos.
 * Cuenta en github
 
 ### Instalacion de entorno
-**⚠ Necesitar crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#¿Como-enviar-tu-trabajo?)
+**⚠ Necesitar crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#Enviar-tu-trabajo).
 ```sh
 virtualenv -p python3 env
 source env/bin/activate
@@ -51,7 +51,7 @@ Actividades extra:
  - Esta aplicacion utiliza [Django 3.2](https://docs.djangoproject.com/en/3.2/releases/3.2/).
  - Se recomienda seguir la [hoja de estilos](https://github.com/HackSoftware/Django-Styleguide) de HackSoft.
 
-### ¿Como enviar tu trabajo?
+### Enviar tu trabajo
 
 1. Primero debes crear un fork de este repositorio.
 
