@@ -16,7 +16,7 @@ requerimientos.
 * Cuenta en github
 
 ### Instalacion de entorno
-**⚠ Necesitar crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#Como enviar tu trabajo?)
+**⚠ Necesitas crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#Como enviar tu trabajo?)
 ```sh
 virtualenv -p python3 env
 source env/bin/activate
@@ -34,7 +34,7 @@ Podes completarlas en el orden que desees.
 Separa tus commits por tareas utillizando el siguiente formato para tus mensajes de commit: TASK-{nro. de tarea}: {mensaje}
 
 ### Tareas
-* TASK 1: Como usuario no puedo agregar una tarea sin descripcion.
+* TASK 1: Como usuario puedo agregar una tarea con descripcion obligatoria.
 * TASK 2: Como usuario puedo marcar una tarea como completada.
 * TASK 3: Como usuario puedo consultar una tarea en formato JSON.
     - Ej: /todos/{id} => {id: 1, user_id: 1, title: "Lorem", description: "Lorem Ipsum"}
@@ -44,7 +44,7 @@ Separa tus commits por tareas utillizando el siguiente formato para tus mensajes
 
 Actividades extra (no obligatorias):
 * OP-TASK 1: Paginar los resultados de la TASK-5
-* 
+* OP-TASK 2: Como usuario puedo asignar fecha límite de finalizacion a una tarea
 
 ### Documentacion
  - Esta aplicacion utiliza [Django 3.2](https://docs.djangoproject.com/en/3.2/releases/3.2/).
