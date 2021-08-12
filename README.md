@@ -48,15 +48,15 @@ Actividades extra (no obligatorias):
 
 ### Documentacion
  - Esta aplicacion utiliza [Django 3.2](https://docs.djangoproject.com/en/3.2/releases/3.2/).
- - Se recomienda seguir la [hoja de estilos](https://github.com/HackSoftware/Django-Styleguide) de HackSoft
+ - Se recomienda seguir la [hoja de estilos](https://github.com/HackSoftware/Django-Styleguide) de HackSoft.
 
-### ¿Como enviar tu trabajo?
+### Enviar tu trabajo
 
 1. Primero debes crear un fork de este repositorio.
 
 2. Luego clona tu fork localmente.
 
-3. Instala tu aplicacion localmente. Ver la [Guia de instalacion](#Instalacion de entorno).
+3. Instala tu aplicacion localmente. Ver la [Guia de instalacion](#Instalacion-de-entorno).
 
 4. Una vez completado tu trabajo, puedes enviar una pull-request a este repositorio.
 
