@@ -16,7 +16,7 @@ requerimientos.
 * Cuenta en github
 
 ### Instalacion de entorno
-**⚠ Necesitas crear un fork a partir de este repositorio.** Ver [Como enviar tu trabajo?](#Enviar-tu-trabajo)
+**⚠ Necesitas crear un fork a partir de este repositorio.** Ver [Enviar tu trabajo](#Enviar-tu-trabajo)
 ```sh
 virtualenv -p python3 env
 source env/bin/activate
@@ -56,7 +56,7 @@ Actividades extra (no obligatorias):
 
 2. Luego clona tu fork localmente.
 
-3. Instala tu aplicacion localmente. Ver la [Guia de instalacion](#Instalacion-de-entorno).
+3. Instala tu aplicacion localmente. Ver la [Guia de instalacion](#Instalacion-de-entorno)
 
 4. Una vez completado tu trabajo, puedes enviar una pull-request a este repositorio.
 
