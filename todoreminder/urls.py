@@ -22,6 +22,5 @@ urlpatterns = [
     path('app/', include('app.urls')),
     path('', views.home, name='home'),
     path('login/', views.login, name='login'),
-    path('singup/', views.singup, name='singup'),
-    path('dashboard', views.dashboard, name='dashboard')
+    path('singup/', views.singup, name='singup')
 ]

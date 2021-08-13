@@ -25,10 +25,10 @@ def login (request):
 
         correct_autenticatation = authenticate(username=username, password=password)
         if correct_autenticatation:
-            return HttpResponseRedirect("/dashboard")
+            return render (request, 'dashboard.html', {'username':username, 'password':password})
         else:
             print("Error, not authenticated")
-            return HttpResponseRedirect ("/")
+    return HttpResponseRedirect ("/")    
 
 def singup (request):
     if (request.method == 'POST'):
@@ -42,7 +42,4 @@ def singup (request):
 
         return HttpResponseRedirect("/")
 
-    return render (request, 'singup.html')
-
-def dashboard (request):
-    return render (request, 'dashboard.html')
+    return render (request, 'singup.html', )
