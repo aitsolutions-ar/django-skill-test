@@ -1,25 +1,34 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Template, Context
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate
 
 #AUX FUNCTIONS
 
 def create_user (first_name, last_name, username, email, password):
-    #Registrar usuario en base de datos
-    return 0
+    new_user = User.objects.create_user(username, email, password)
+    new_user.first_name = first_name
+    new_user.last_name = last_name
+    new_user.save()
+
+    return ("Ok")
 
 def home (request):
     return render (request, 'index.html')
 
 def login (request):
     if (request.method == 'POST'):
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
 
-        if (validate (email, password)):
-            return HttpResponseRedirect("")
-        else :
-            return HttpResponse("User not found")
+        correct_autenticatation = authenticate(username=username, password=password)
+        if correct_autenticatation:
+            return HttpResponseRedirect("/dashboard")
+        else:
+            print("Error, not authenticated")
+            return HttpResponseRedirect ("/")
 
 def singup (request):
     if (request.method == 'POST'):
@@ -34,3 +43,6 @@ def singup (request):
         return HttpResponseRedirect("/")
 
     return render (request, 'singup.html')
+
+def dashboard (request):
+    return render (request, 'dashboard.html')
