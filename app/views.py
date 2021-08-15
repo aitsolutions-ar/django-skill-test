@@ -32,6 +32,10 @@ def add_todo(request):
         return HttpResponseRedirect("/app/")
     return render (request, 'add_todo.html')
 
+def done (request, todo_id):
+    todo = models.Todo.objects.filter(id=todo_id).update(is_done=True)
+    return HttpResponseRedirect("/app/")
+
 def log_out(request):
     logout(request)
     return HttpResponseRedirect("/")
