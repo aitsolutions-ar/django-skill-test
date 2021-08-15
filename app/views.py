@@ -11,9 +11,11 @@ class TodoViewset(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
 
 def app_view (request):
+    todos = models.Todo.objects.filter(user_id=request.session['id'])
     ctx = {
         'username': request.session['name'],
-        'user_id': request.session['id']
+        'user_id': request.session['id'],
+        'todos': todos
     }
     return render(request, 'dashboard.html', ctx)
 

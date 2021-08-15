@@ -2,14 +2,33 @@
 <html>
     <head>
         <title> TODOreminder | Dashboard </title>
+        <style>
+            td,  th {
+                padding: 7px 20px;
+            }
+        </style>
     </head>
     <body>
         <h1> {{ username }} dashboard </h1>
 
         <p>Tasks: </p>
+        <table style="border: 1px solid;">
+            <tr>
+                <th> Title </th>
+                <th> Description</th>
+            </tr>
+            {% for todo in todos %}
+                <tr>
+                    <td> {{todo.title}} </td>
+                    <td> {{todo.description}} </td>
+                </tr>
+                 
+            {%endfor%}
+        </table>
+
+        <br> <br>
 
         <a href="addtodo/"> Add todo<a>
-        <a href="deletetodo"> Delete todo</a>
-
+        <a href="">Delete todo</a>
     </body>
 </html>
