@@ -6,7 +6,7 @@
     </head>
     <body>
         <h2>SingUp</h2>
-        <form action="/singup/" method="post">
+        <form action="/singup/" method="post"> {% csrf_token %}
 
             <label for="usr-first-name">first name:</label>
             <input id="usr-first-name" type="text" name="first_name" required>

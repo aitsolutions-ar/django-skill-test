@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
 
 from app import models
 from .serializers import TodoSerializer
@@ -11,6 +12,7 @@ class TodoViewset(viewsets.ModelViewSet):
     queryset = models.Todo.objects.all()
     serializer_class = TodoSerializer
 
+@csrf_exempt
 def app_view (request):
     todos = models.Todo.objects.filter(user_id=request.session['id'])
     ctx = {

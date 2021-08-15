@@ -6,7 +6,7 @@
     <body>
         <h1> add todo </h1>
 
-        <form action="/app/addtodo/" method="post">
+        <form action="/app/addtodo/" method="post"> {% csrf_token %}
             <label for="todo-title">Title:</label>
             <input id="too-title" type="text" name="title" required>
             <br> <br>

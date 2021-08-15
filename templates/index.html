@@ -8,7 +8,7 @@
 
         <h2>Welcome to TODOreminder!</h2>
         <br>
-        <form action="login/" method="post">
+        <form action="login/" method="post"> {% csrf_token %}
             <label for="usr-username">username:</label>
             <input id="usr-username" type="text" name="username" required>
         <label for="usr-pass">password:</label>

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 
 #AUX FUNCTIONS
 
@@ -35,6 +36,7 @@ def login (request):
             print("Error, not authenticated")
     return HttpResponseRedirect ("/")    
 
+@csrf_exempt
 def singup (request):
     if (request.method == 'POST'):
         first_name = request.POST['first_name']

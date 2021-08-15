@@ -3,8 +3,14 @@
     <head>
         <title> TODOreminder | Dashboard </title>
         <style>
-            td,  th {
+            td {
                 padding: 7px 20px;
+                text-align: center;
+            }
+            th {
+                padding: 7px 20px;
+                text-align: center;
+                border-bottom: 1px solid;
             }
             a {
                 padding: 0px 20px;
@@ -13,8 +19,8 @@
     </head>
     <body>
         <h1> {{ username }} dashboard </h1>
-
-        <p>Tasks: </p>
+        <br>
+        <h4>Tasks: </h4>
         {% if todos %}
             <table style="border: 1px solid;">
                 <tr>
@@ -28,7 +34,7 @@
                         {% if todo.is_done %}
                             <td style="text-decoration:line-through;"> {{todo.title}} </td>
                             <td style="text-decoration:line-through;"> {{todo.description}} </td>
-                            <td></td>
+                            <td> x </td>
                         {% else %}
                             <td> {{todo.title}} </td>
                             <td> {{todo.description}} </td>
@@ -44,9 +50,7 @@
             </table>
         {% endif %}
         <br> <br>
-
         <a href="addtodo/"> Add todo<a>
-        <a href=""> Delete todo</a>
         <a href="logout/"> Logout</a>
     </body>
 </html>
