@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> TODOreminder | add Todo </title>
+    </head>
+    <body>
+        <h1> add todo </h1>
+
+        <form action="/app/addtodo/" method="post">
+            <label for="todo-title">Title:</label>
+            <input id="too-title" type="text" name="title" required>
+            <br> <br>
+            <label for="todo-desc">Description:</label>
+            <input id="todo-desc" type="text" name="description" required>
+            <br> <br>
+            <input type="submit" value="add">
+        </form>
+    </body>
+</html>

@@ -15,4 +15,16 @@ def app_view (request):
         'username': request.session['name'],
         'user_id': request.session['id']
     }
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard.html', ctx)
+
+def add_todo(request):
+    if (request.method == 'POST'):
+        title = request.POST['title']
+        description = request.POST['description']
+        is_done = False
+        user_id = request.session['id']
+
+        todo = models.Todo(title=title, description=description, is_done=is_done, user_id=user_id)
+        todo.save()
+        return HttpResponseRedirect("/app/")
+    return render (request, 'add_todo.html')
