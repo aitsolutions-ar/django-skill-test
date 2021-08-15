@@ -20,20 +20,26 @@
                 <tr>
                     <th> Title </th>
                     <th> Description</th>
+                    <th> Done </th>
+                    <th> JSON </th>
                 </tr>
                 {% for todo in todos %}
                     <tr>
                         {% if todo.is_done %}
                             <td style="text-decoration:line-through;"> {{todo.title}} </td>
                             <td style="text-decoration:line-through;"> {{todo.description}} </td>
+                            <td></td>
                         {% else %}
                             <td> {{todo.title}} </td>
                             <td> {{todo.description}} </td>
                             <td> 
                                 <a href="done/{{todo.id}}"> Done </a> 
                             </td>
-                        </tr>
                         {% endif %}
+                        <td>
+                            <a href="/app/todos/{{todo.id}}?format=json">JSON</a>
+                        </td>
+                    </tr>
                 {%endfor%}
             </table>
         {% endif %}
