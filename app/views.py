@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth import logout
 
 from app import models
 from .serializers import TodoSerializer
@@ -30,3 +31,7 @@ def add_todo(request):
         todo.save()
         return HttpResponseRedirect("/app/")
     return render (request, 'add_todo.html')
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect("/")

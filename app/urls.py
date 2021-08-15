@@ -9,5 +9,6 @@ router.register('', TodoViewset)
 urlpatterns = [
     path('todos/', include(router.urls)),
     path('', app_view, name='app_view'),
-    path('addtodo/', add_todo, name='add_todo')
+    path('addtodo/', add_todo, name='add_todo'),
+    path('logout/', log_out, name='log_out')
 ]
