@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.shortcuts import redirect
 
 #AUX FUNCTIONS
 
@@ -25,7 +26,11 @@ def login (request):
 
         correct_autenticatation = authenticate(username=username, password=password)
         if correct_autenticatation:
-            return render (request, 'dashboard.html', {'username':username, 'password':password})
+            data = User.objects.get(username=username)
+
+            request.session['id'] = data.id
+            request.session['name'] = username
+            return redirect('/app/')
         else:
             print("Error, not authenticated")
     return HttpResponseRedirect ("/")    
