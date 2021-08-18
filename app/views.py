@@ -25,14 +25,19 @@ def app_view (request, page):
 
     selected_page = page_todo.page(page)
 
-    next_page = 0
-    prev_page = 0
+    next_page = None
+    prev_page = None
 
     if (page < amount_pages):
         next_page = page + 1
+    elif (page == amount_pages):
+        next_page = None
+
     if (page >= 2):
         prev_page = page - 1
-
+    else:
+        prev_page = None
+    
     ctx = {
         'username': username,
         'user_id': user,
@@ -42,7 +47,6 @@ def app_view (request, page):
         'next_page': next_page,
         'prev_page': prev_page
     }
-    print(ctx)
     return render(request, 'dashboard.html', ctx)
 
 def add_todo(request):

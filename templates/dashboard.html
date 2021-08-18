@@ -55,7 +55,11 @@
             <br> <br> 
 
             {% if current_page == 1 %}
-                <p> {{current_page}} <a href="/app/{{next_page}}" class="next round">&#8250;</a> </p>
+                {% if next_page %}
+                    <p> {{current_page}} <a href="/app/{{next_page}}" class="next round">&#8250;</a> </p>
+                {% else %}
+                    <p> {{current_page}} </p>
+                {% endif %}
             {% else %}
                 {% if current_page == amount_pages %}
                     <p> <a href="/app/{{prev_page}}" class="previous round">&#8249;</a> {{current_page}} </p>
