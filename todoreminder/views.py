@@ -21,7 +21,7 @@ def login (request):
         if (user):
             request.session['id'] = user.id
             request.session['name'] = username
-            return redirect('/app/')
+            return redirect('/app/1')
         else:
             print("Error, not authenticated")
     return HttpResponseRedirect ("/")    

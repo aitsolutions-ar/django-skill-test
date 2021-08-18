@@ -21,16 +21,28 @@ def app_view (request, page):
     username = request.session['name']
     todos = services.get_todos(user, username)
     page_todo = Paginator(todos, 5)
+    amount_pages = page_todo.num_pages
 
     selected_page = page_todo.page(page)
+
+    next_page = 0
+    prev_page = 0
+
+    if (page < amount_pages):
+        next_page = page + 1
+    if (page >= 2):
+        prev_page = page - 1
 
     ctx = {
         'username': username,
         'user_id': user,
         'todos': selected_page.object_list,
-        'amount_pages': page_todo.num_pages
+        'amount_pages': amount_pages,
+        'current_page': page,
+        'next_page': next_page,
+        'prev_page': prev_page
     }
-
+    print(ctx)
     return render(request, 'dashboard.html', ctx)
 
 def add_todo(request):

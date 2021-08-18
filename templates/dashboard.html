@@ -50,6 +50,23 @@
                     </tr>
                 {%endfor%}
             </table>
+            
+
+            <br> <br> 
+
+            {% if current_page == 1 %}
+                <p> {{current_page}} <a href="/app/{{next_page}}" class="next round">&#8250;</a> </p>
+            {% else %}
+                {% if current_page == amount_pages %}
+                    <p> <a href="/app/{{prev_page}}" class="previous round">&#8249;</a> {{current_page}} </p>
+                {% else %}
+                    <p>
+                        <a href="/app/{{prev_page}}" class="previous round">&#8249;</a>
+                        {{current_page}}
+                        <a href="/app/{{next_page}}" class="next round">&#8250;</a>
+                    </p>
+                {% endif %}
+            {%endif%}
         {% endif %}
         <br> <br>
         <a href="addtodo/"> Add todo<a>
