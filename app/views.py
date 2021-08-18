@@ -20,6 +20,8 @@ from rest_framework.response import Response
 
 from django.core.exceptions import ObjectDoesNotExist
 
+from .forms import TodoCreationForm
+
 '''
 class TodoViewset(viewsets.ModelViewSet):
     queryset = models.Todo.objects.all()
@@ -73,5 +75,14 @@ class TodoDetailJSON(LoginRequiredMixin, APIView):
             serializer = TodoSerializer(todo, many=False)
             return Response(serializer.data)
         except ObjectDoesNotExist:
-            return Response("No existe la tarea")
+            return Response("No existe la tarea",status=404)
+
+class TodoCreate(LoginRequiredMixin, CreateView):
+    model = models.Todo
+    success_url = reverse_lazy('todos')
+    form_class = TodoCreationForm
+
+    def form_valid(self, form): 
+        form.instance.user = self.request.user
+        return super(TodoCreate,self).form_valid(form)
             
