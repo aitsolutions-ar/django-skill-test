@@ -14,7 +14,7 @@ class TodoViewset(viewsets.ModelViewSet):
 
 @csrf_exempt
 def app_view (request):
-    todos = models.Todo.objects.filter(user_id=request.session['id'])
+    todos = models.Todo.objects.filter(user_id=request.session['id']).order_by('-id')
     ctx = {
         'username': request.session['name'],
         'user_id': request.session['id'],
