@@ -28,13 +28,18 @@ def done_todo (todo_id):
 
 def get_todos (user, username):
     todos = models.Todo.objects.filter(user_id=user).order_by('-id')
-    ctx = {
-        'username': username,
-        'user_id': user,
-        'todos': todos
-    }
+    
+    todos_list = []
+    for todo in todos:
+        task = {
+            'title': todo.title,
+            'description': todo.description,
+            'is_done': todo.is_done,
+            'user_id': todo.user_id
+        }
+        todos_list.append(task)
 
-    return ctx
+    return todos_list
 
 def authentication (username, password):
     correct_autenticatation = authenticate(username=username, password=password)
