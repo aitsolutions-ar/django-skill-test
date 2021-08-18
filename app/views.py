@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 
 from app import models
+from app import services
 from .serializers import TodoSerializer
 
 
@@ -15,12 +16,9 @@ class TodoViewset(viewsets.ModelViewSet):
 
 @csrf_exempt
 def app_view (request):
-    todos = models.Todo.objects.filter(user_id=request.session['id']).order_by('-id')
-    ctx = {
-        'username': request.session['name'],
-        'user_id': request.session['id'],
-        'todos': todos
-    }
+    user = request.session['id']
+    username = request.session['name']
+    ctx = services.get_todos(user, username)
     return render(request, 'dashboard.html', ctx)
 
 def add_todo(request):
@@ -28,24 +26,15 @@ def add_todo(request):
         title = request.POST['title']
         description = request.POST['description']
         is_done = False
-        user_id = request.session['id']
+        user = request.session['id']
 
-        url = 'http://127.0.0.1:8000/app/todos/'
-
-        todo = {
-            'title': title,
-            'description': description,
-            'is_done': is_done,
-            'user': user_id
-        }
-
-        response = requests.post(url, data=todo)
+        services.add_todo(title, description, is_done, user)
 
         return HttpResponseRedirect("/app/")
     return render (request, 'add_todo.html')
 
 def done (request, todo_id):
-    todo = models.Todo.objects.filter(id=todo_id).update(is_done=True)
+    services.done_todo(todo_id)
     return HttpResponseRedirect("/app/")
 
 def log_out(request):

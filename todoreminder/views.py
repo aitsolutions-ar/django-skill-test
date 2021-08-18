@@ -6,16 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
-
-#AUX FUNCTIONS
-
-def create_user (first_name, last_name, username, email, password):
-    new_user = User.objects.create_user(username, email, password)
-    new_user.first_name = first_name
-    new_user.last_name = last_name
-    new_user.save()
-
-    return ("Ok")
+from app import services
 
 def home (request):
     return render (request, 'index.html')
@@ -25,11 +16,10 @@ def login (request):
         username = request.POST['username']
         password = request.POST['password']
 
-        correct_autenticatation = authenticate(username=username, password=password)
-        if correct_autenticatation:
-            data = User.objects.get(username=username)
+        user = services.authentication(username, password)
 
-            request.session['id'] = data.id
+        if (user):
+            request.session['id'] = user.id
             request.session['name'] = username
             return redirect('/app/')
         else:
@@ -45,7 +35,7 @@ def singup (request):
         email = request.POST['email']
         password = request.POST['password']
 
-        create_user (first_name, last_name, username, email, password)
+        services.create_user (first_name, last_name, username, email, password)
 
         return HttpResponseRedirect("/")
 
