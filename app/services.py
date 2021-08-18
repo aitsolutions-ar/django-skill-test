@@ -32,6 +32,7 @@ def get_todos (user, username):
     todos_list = []
     for todo in todos:
         task = {
+            'id': todo.id,
             'title': todo.title,
             'description': todo.description,
             'is_done': todo.is_done,

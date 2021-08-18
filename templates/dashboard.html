@@ -24,7 +24,7 @@
         {% if todos %}
             <table style="border: 1px solid;">
                 <tr>
-                    <th> N° </th>
+                    <th> ID </th>
                     <th> Title </th>
                     <th> Description</th>
                     <th> Done </th>
@@ -32,7 +32,7 @@
                 </tr>
                 {% for todo in todos %}
                     <tr>
-                        <td> {{ forloop.counter }} </td>
+                        <td> {{todo.id}} </td>
                         {% if todo.is_done %}
                             <td style="text-decoration:line-through;"> {{todo.title}} </td>
                             <td style="text-decoration:line-through;"> {{todo.description}} </td>
