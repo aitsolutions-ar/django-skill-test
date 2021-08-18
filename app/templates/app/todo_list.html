@@ -17,7 +17,14 @@
         </tr>
         {% for todo in object_list %}
             <tr>
-                <td>{{todo.title}}</td>
+                {% if todo.is_done %}
+                <td><del><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></del></td>
+                {% else %}
+                <td><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></td>
+                {% endif %}
+                <td> </td>
+                <td> </td>
+                <td><a href="{% url 'eliminar' todo.id %}"> Eliminar </a></td> 
             </tr>
         {% endfor %}
     {% endif %}

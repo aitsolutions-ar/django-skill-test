@@ -7,7 +7,7 @@ from .serializers import TodoSerializer
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views.generic.list import ListView
 
 from django.contrib.auth.views import LoginView
@@ -20,7 +20,7 @@ from rest_framework.response import Response
 
 from django.core.exceptions import ObjectDoesNotExist
 
-from .forms import TodoCreationForm
+from .forms import TodoCreationForm, TodoUpdateForm
 
 '''
 class TodoViewset(viewsets.ModelViewSet):
@@ -79,6 +79,7 @@ class TodoDetailJSON(LoginRequiredMixin, APIView):
             return Response("No existe la tarea",status=404)
 
 class TodoCreate(LoginRequiredMixin, CreateView):
+    template_name = 'app/todo_form.html'
     model = models.Todo
     success_url = reverse_lazy('todos')
     form_class = TodoCreationForm
@@ -87,3 +88,13 @@ class TodoCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TodoCreate,self).form_valid(form)
             
+def todoDelete(request,pk):
+    todo = models.Todo.objects.get(id=pk)
+    todo.delete()
+    return redirect('todos')
+
+class TodoUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'app/todo_form.html'
+    model = models.Todo
+    success_url = reverse_lazy('todos')
+    form_class = TodoUpdateForm
