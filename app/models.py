@@ -18,3 +18,6 @@ class Todo(models.Model):
         on_delete=models.DO_NOTHING,
         null=True
     )
+    created = models.DateTimeField(
+        auto_now_add=True
+    )

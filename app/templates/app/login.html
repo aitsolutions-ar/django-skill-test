@@ -1,0 +1,9 @@
+<h1>Inicia sesión para agregar tareas</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Ingresar">
+</form>
+
+<a href="{% url 'register' %}">Registrarse</a>

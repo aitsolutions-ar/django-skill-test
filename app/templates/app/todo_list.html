@@ -1,0 +1,25 @@
+
+<p>Usuario: {{request.user}}</p>
+<a href="{% url 'logout' %}">Logout</a>
+
+<hr>
+<h1>Mis tareas</h1>
+
+<table>
+
+    {% if object_list|length == 0 %}
+        <h3>No se encontraron tareas</h3>
+    
+    {% else %}
+        <tr>
+            <th>Tarea</th>
+            <th></th>
+        </tr>
+        {% for todo in object_list %}
+            <tr>
+                <td>{{todo.title}}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+
