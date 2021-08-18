@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
+import requests
 
 from app import models
 from .serializers import TodoSerializer
@@ -29,8 +30,17 @@ def add_todo(request):
         is_done = False
         user_id = request.session['id']
 
-        todo = models.Todo(title=title, description=description, is_done=is_done, user_id=user_id)
-        todo.save()
+        url = 'http://127.0.0.1:8000/app/todos/'
+
+        todo = {
+            'title': title,
+            'description': description,
+            'is_done': is_done,
+            'user': user_id
+        }
+
+        response = requests.post(url, data=todo)
+
         return HttpResponseRedirect("/app/")
     return render (request, 'add_todo.html')
 
