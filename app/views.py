@@ -60,6 +60,7 @@ class TodoList(LoginRequiredMixin,ListView):
     model = models.Todo
     template_name = 'app/todo_list.html'
     context_object_name = 'todos'
+    paginate_by = 5
 
     def get_queryset(self):
         user = self.request.user
