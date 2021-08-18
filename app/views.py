@@ -1,3 +1,5 @@
+import re
+from django.http.response import Http404
 from rest_framework import viewsets
 
 from app import models
@@ -5,7 +7,7 @@ from .serializers import TodoSerializer
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 from django.views.generic.list import ListView
 
 from django.contrib.auth.views import LoginView
@@ -13,6 +15,10 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from django.core.exceptions import ObjectDoesNotExist
 
 '''
 class TodoViewset(viewsets.ModelViewSet):
@@ -58,3 +64,14 @@ class TodoList(LoginRequiredMixin,ListView):
         if user.is_authenticated:
             return models.Todo.objects.filter(user=self.request.user).order_by('-created')
         return models.Todo.objects.filter(user=None)
+
+class TodoDetailJSON(LoginRequiredMixin, APIView):
+    def get(self,request,pk):
+        user = self.request.user
+        try:
+            todo = models.Todo.objects.filter(user=self.request.user).get(id=pk)
+            serializer = TodoSerializer(todo, many=False)
+            return Response(serializer.data)
+        except ObjectDoesNotExist:
+            return Response("No existe la tarea")
+            

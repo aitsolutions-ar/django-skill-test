@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TodoLogin, TodoRegister, TodoList
+from .views import TodoLogin, TodoRegister, TodoList, TodoDetailJSON
 from django.contrib.auth.views import LogoutView
 
 
@@ -18,5 +18,6 @@ urlpatterns = [
     path('login/',TodoLogin.as_view(),name = 'login'),
     path('register/',TodoRegister.as_view(),name='register'),
     path('logout/',LogoutView.as_view(),name='logout'),
-    path('todos/', TodoList.as_view(), name='todos')
+    path('todos/', TodoList.as_view(), name='todos'),
+    path('todos/<int:pk>/', TodoDetailJSON.as_view(), name='todoJSON'),
 ]
