@@ -14,7 +14,8 @@ class TodoCreationForm(ModelForm):
 class TodoUpdateForm(ModelForm):
     class Meta:
         model = Todo
-        fields = ('title', 'description', 'is_done')
+        fields = ('title', 'description', 'is_done','deadline')
         widgets = {
+            'deadline': DateInput(attrs={'class':'form-control', 'type':'date'}),
             'description': Textarea(attrs={'cols': 80, 'rows': 5})
         }

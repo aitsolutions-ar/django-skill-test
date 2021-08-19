@@ -102,3 +102,9 @@ class TodoUpdate(LoginRequiredMixin, UpdateView):
     model = models.Todo
     success_url = reverse_lazy('todos')
     form_class = TodoUpdateForm
+
+def todoComplete(request,pk):
+    todo = models.Todo.objects.get(id=pk)
+    todo.is_done = True
+    todo.save()
+    return redirect('todos')
