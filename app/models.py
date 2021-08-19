@@ -21,3 +21,7 @@ class Todo(models.Model):
     created = models.DateTimeField(
         auto_now_add=True
     )
+    deadline = models.DateTimeField(
+        null=True,
+        blank=True
+    )

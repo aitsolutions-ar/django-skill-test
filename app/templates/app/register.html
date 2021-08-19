@@ -1,3 +1,6 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
 <h1>Crear una cuenta</h1>
 
 <form method="POST">
@@ -5,3 +8,7 @@
     {{form.as_table}}
     <input type="submit" value="Registrar">
 </form>
+
+<a href="{% url 'login' %}">Volver</a>
+
+{% endblock content %}

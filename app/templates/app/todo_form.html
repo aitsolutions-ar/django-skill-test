@@ -1,7 +1,18 @@
-<h1>Nueva tarea</h1>
+{% extends 'app/base.html' %}
+{% block content %}
+
+
+{% if todo.id is None %}
+    <h1>Nueva tarea</h1>
+{% else %}
+    <h1>Tarea {{todo.id}}</h1>
+{% endif %}
+
 
 <form method="POST">
-{%csrf_token%}
-{{form.as_p}}
-<input type="submit" value="Guardar">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Guardar">
 </form>
+
+{% endblock content %}

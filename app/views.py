@@ -68,6 +68,7 @@ class TodoList(LoginRequiredMixin,ListView):
             return models.Todo.objects.filter(user=self.request.user).order_by('-created')
         return models.Todo.objects.filter(user=None)
 
+
 class TodoDetailJSON(LoginRequiredMixin, APIView):
     def get(self,request,pk):
         user = self.request.user
@@ -78,6 +79,7 @@ class TodoDetailJSON(LoginRequiredMixin, APIView):
         except ObjectDoesNotExist:
             return Response("No existe la tarea",status=404)
 
+
 class TodoCreate(LoginRequiredMixin, CreateView):
     template_name = 'app/todo_form.html'
     model = models.Todo
@@ -87,11 +89,13 @@ class TodoCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form): 
         form.instance.user = self.request.user
         return super(TodoCreate,self).form_valid(form)
-            
+
+
 def todoDelete(request,pk):
     todo = models.Todo.objects.get(id=pk)
     todo.delete()
     return redirect('todos')
+
 
 class TodoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'app/todo_form.html'

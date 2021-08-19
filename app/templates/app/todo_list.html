@@ -1,3 +1,5 @@
+{% extends 'app/base.html' %}
+{% block content %}
 
 <p>Usuario: {{request.user}}</p>
 <a href="{% url 'logout' %}">Logout</a>
@@ -13,17 +15,17 @@
     {% else %}
         <tr>
             <th>Tarea</th>
-            <th></th>
+            <th>Fecha fin</th>
+
         </tr>
         {% for todo in object_list %}
             <tr>
                 {% if todo.is_done %}
-                <td><del><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></del></td>
+                    <td><del><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></del></td>
                 {% else %}
-                <td><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></td>
+                    <td><a href="{% url 'editar' todo.id %}">{{todo.title}}</a></td>
                 {% endif %}
-                <td> </td>
-                <td> </td>
+                <td>{{todo.deadline}} </td>
                 <td><a href="{% url 'eliminar' todo.id %}"> Eliminar </a></td> 
             </tr>
         {% endfor %}
@@ -33,6 +35,12 @@
 <h1></h1>
 <h1></h1>
 
+<a href="{% url 'agregar' %}">Nueva tarea</a>
+
+<h1></h1>
+<hr>
+<h1></h1>
+<h1></h1>
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -50,5 +58,4 @@
         {% endif %}
     </span>
 </div>
-<hr>
-<a href="{% url 'agregar' %}">Nueva tarea</a>
+{% endblock content %}
