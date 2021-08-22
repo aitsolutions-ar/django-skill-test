@@ -8,6 +8,40 @@ from app.services import todo_create
 from app.selectors import todo_list
 from app.models import Todo
 
+from api_helpers.mixins import ApiErrorsMixin
+from api_helpers.pagination import get_paginated_response, LimitOffsetPagination
+
+
+class TodoListApi(ApiErrorsMixin, APIView):
+    permission_classes = [IsAuthenticated]
+
+    class Pagination(LimitOffsetPagination):
+        default_limit = 2
+
+    class OutputSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Todo
+            fields = (
+                'id',
+                'title',
+                'description',
+                'created_at',
+                'is_done'
+            )
+
+    def get(self, request):
+        todos = todo_list(user_id=request.user.id)
+        # data = self.OutputSerializer(todos, many=True).data
+
+        return get_paginated_response(
+            pagination_class=self.Pagination,
+            serializer_class=self.OutputSerializer,
+            queryset=todos,
+            request=request,
+            view=self
+        )
+
+
 
 class TodoCreateApi(APIView):
     permission_classes = [IsAuthenticated]
@@ -25,23 +59,3 @@ class TodoCreateApi(APIView):
         todo_create(user_id=user_id, **serializer.validated_data)
 
         return Response(status=status.HTTP_201_CREATED)
-
-
-class TodoListApi(APIView):
-    permission_classes = [IsAuthenticated]
-
-    class OutputSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Todo
-            fields = (
-                'id',
-                'title',
-                'description',
-                'created_at',
-                'is_done'
-            )
-
-    def get(self, request):
-        todos = todo_list(user_id=request.user.id)
-        data = self.OutputSerializer(todos, many=True).data
-        return Response(data)

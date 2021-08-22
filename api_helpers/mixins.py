@@ -9,7 +9,7 @@ from rest_framework import exceptions as rest_exceptions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BaseAuthentication
 
-from onlineacademy.errors import get_error_message
+from api_helpers.errors import get_error_message
 
 
 def get_auth_header(headers):
