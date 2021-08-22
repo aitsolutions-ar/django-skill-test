@@ -1,10 +1,8 @@
 from datetime import datetime
 from django.contrib.auth.models import User
 from app.models import Todo
-from app.selectors import (
-    user_get,
-    todo_get
-)
+from app.selectors import todo_get
+from users.selectors import user_get
 
 
 def todo_create(

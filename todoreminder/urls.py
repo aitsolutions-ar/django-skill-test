@@ -22,6 +22,8 @@ from app.apis import (
     TodoListApi,
     TodoUpdateApi
 )
+from users.apis import UserCreateApi
+
 
 todo_patterns = [
     path('', TodoListApi.as_view(), name='list'),
@@ -31,8 +33,12 @@ todo_patterns = [
     path('<int:todo_id>/delete', TodoDeleteApi.as_view(), name='delete'),
 ]
 
+user_patterns = [
+    path('register/', UserCreateApi.as_view(), name='register-user')
+]
 
 urlpatterns = [
     path('todos/', include((todo_patterns, 'todos'))),
+    path('users/', include((user_patterns, 'users'))),
     path('api-auth/', include('rest_framework.urls')),
 ]

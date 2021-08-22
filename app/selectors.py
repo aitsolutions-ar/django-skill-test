@@ -6,17 +6,6 @@ from django.core.exceptions import (
 )
 
 
-def user_get(
-    *,
-    id: int
-) -> User:
-    try:
-        user = User.objects.get(id=id)
-        return user
-    except ObjectDoesNotExist:
-        return
-
-
 def todo_list(
     *,
     user_id: int
