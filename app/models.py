@@ -8,7 +8,6 @@ class Todo(models.Model):
     )
     description = models.CharField(
         max_length=128,
-        null=True
     )
     is_done = models.BooleanField(
         default=False

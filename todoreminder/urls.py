@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from app.apis import(
+    TodoCreateApi
+)
+
+todo_patterns = [
+    path('create/', TodoCreateApi.as_view(), name='create'),
+]
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('app/', include('app.urls'))
+    path('todos/', include((todo_patterns, 'todos'))),
+    path('api-auth/', include('rest_framework.urls')),
 ]
