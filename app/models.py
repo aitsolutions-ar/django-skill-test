@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
-# Create your models here.
+
 class Todo(models.Model):
     title = models.CharField(
         max_length=32

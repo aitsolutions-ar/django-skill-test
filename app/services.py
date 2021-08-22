@@ -1,14 +1,17 @@
-from app.models import Todo
-from app.selectors import user_get, todo_get
-from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib.auth.models import User
+from app.models import Todo
+from app.selectors import (
+    user_get,
+    todo_get
+)
 
 
 def todo_create(
     *,
     user_id: int,
     title: str,
-    description:str,
+    description: str,
     is_done: bool,
     completion_deadline: datetime
 ) -> Todo:

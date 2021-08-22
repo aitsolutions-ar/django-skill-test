@@ -1,7 +1,9 @@
 from app.models import Todo
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
-
+from django.core.exceptions import (
+    ObjectDoesNotExist,
+    PermissionDenied
+)
 
 
 def user_get(
@@ -25,7 +27,7 @@ def todo_list(
 
 def todo_get(
     *,
-    fetched_by:User,
+    fetched_by: User,
     todo_id: int
 ) -> Todo:
     try:

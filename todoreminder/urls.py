@@ -15,12 +15,12 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path, include
-from app.apis import(
-    TodoListApi,
+from app.apis import (
     TodoCreateApi,
+    TodoDeleteApi,
     TodoDetailApi,
-    TodoUpdateApi,
-    TodoDeleteApi
+    TodoListApi,
+    TodoUpdateApi
 )
 
 todo_patterns = [
