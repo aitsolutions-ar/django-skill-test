@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from app.apis import(
-    TodoCreateApi
+    TodoCreateApi,
+    TodoListApi
 )
 
 todo_patterns = [
     path('create/', TodoCreateApi.as_view(), name='create'),
+    path('', TodoListApi.as_view(), name='list'),
 ]
 
 

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 # Create your models here.
 class Todo(models.Model):
@@ -7,7 +7,7 @@ class Todo(models.Model):
         max_length=32
     )
     description = models.CharField(
-        max_length=128,
+        max_length=128
     )
     is_done = models.BooleanField(
         default=False
@@ -16,4 +16,7 @@ class Todo(models.Model):
         'auth.User',
         on_delete=models.DO_NOTHING,
         null=True
+    )
+    created_at = models.DateTimeField(
+        default=timezone.now
     )
