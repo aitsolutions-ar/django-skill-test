@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from todoreminder import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('app.urls'))
+    path('app/', include('app.urls')),
+    path('', views.home, name='home'),
+    path('login/', views.login, name='login'),
+    path('singup/', views.singup, name='singup'),
 ]

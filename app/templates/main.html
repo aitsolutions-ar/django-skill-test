@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title> TODOreminder </title>
+        <style>
+            td {
+                padding: 5px 20px;
+                text-align: center;
+            }
+            th {
+                padding: 5px 20px;
+                text-align: center;
+                border-bottom: 3px solid;
+            }
+            a {
+                padding: 0px 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <br>
+        <h3><center>Tareas: </center></h3>
+        {% if todos %}
+            <center>
+            <table style="border: 3px solid;">
+                <tr>
+                    <th> Numero </th>
+                    <th> Nombre </th>
+                    <th> Descripción</th>
+                    <th> Fecha límite</th>
+                    <th> Realizado? </th>
+                    <th> JSON </th>
+
+                </tr>
+                {% for todo in todos %}
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+                        {% if todo.is_done %}
+                            <td style="text-decoration:line-through;"> {{todo.title}} </td>
+                            <td style="text-decoration:line-through;"> {{todo.description}} </td>
+                            <td style="text-decoration:line-through;"> {{todo.finish_time}} </td>
+                            <td> <p style="color:green;"> &#10003; </p> </td>
+                        {% else %}
+                            <td> {{todo.title}} </td>
+                            <td> {{todo.description}} </td>
+                            <td> {{todo.finish_time}} </td>
+                            <td> 
+                                <a href="done/{{todo.id}}"> Finalizada </a> 
+                            </td>
+                        {% endif %}
+                            <td>
+                                <a href="/app/todos/{{todo.id}}?format=json">&#33;</a>
+                            </td>
+                        </tr>
+                {%endfor%}
+            </table>
+            </center>
+
+
+            <br>  
+            <center>
+            {% if current_page == 1 %}
+                <p> {{current_page}} <a href="/app/{{next_page}}" class="next round">&#8594;;</a> </p>
+            {% else %}
+                {% if current_page == cant_pages %}
+                    <p> <a href="/app/{{prev_page}}" class="previous round">&#8592;</a> {{current_page}} </p>
+                {% else %}
+                    <p>
+                        <a href="/app/{{prev_page}}" class="previous round">&#8592;</a>
+                        {{current_page}}
+                        <a href="/app/{{next_page}}" class="next round">&#8594;;</a>
+                    </p>
+                {% endif %}
+            {%endif%}
+            </center>
+        {% endif %}
+        <H1><center> <a  href="addtodo/"> Nueva tarea<a> </center></H1>
+
+        <H3 align="right"><a href="logout/"> Logout</a></H3>
+    </body>
+</html>

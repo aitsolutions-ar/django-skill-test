@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title> Nueva tarea </title>
+    </head>
+    <body><center>
+        <h1> Agregar nueva Tarea </h1>
+
+        <form action="/app/addtodo/" method="post"> {% csrf_token %}
+            <label for="todo-title">Título:</label>
+            <input id="too-title" type="text" name="title" required>
+            <br> <br>
+            <label for="todo-desc">Descripción:</label>
+            <input id="todo-desc" type="text" name="description" required>
+            <br> <br>
+            <label for="start">Fecha a completar:</label>
+        
+            <input type="date" id="start" name="finish_time">
+            <br>        
+            <input type="submit" value="Guardar">
+        </form>
+    </center></body>
+</html>
