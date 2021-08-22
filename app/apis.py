@@ -44,7 +44,7 @@ class TodoListApi(APIView):
         )
 
 
-class TodoCreateApi(APIView):
+class TodoCreateApi(APIView, ApiErrorsMixin):
     permission_classes = [IsAuthenticated]
 
     class InputSerializer(serializers.Serializer):

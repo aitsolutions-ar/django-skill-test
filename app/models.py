@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Todo(models.Model):
@@ -25,3 +25,8 @@ class Todo(models.Model):
         blank=True,
         null=True
     )
+
+    def clean(self):
+        if self.completion_deadline:
+            if self.created_at > self.completion_deadline:
+                raise ValidationError("End date cannot be before start date!")
