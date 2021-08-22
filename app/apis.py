@@ -2,17 +2,19 @@ from rest_framework.views import APIView
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import status
+
+from api_helpers.mixins import ApiErrorsMixin
+
 from rest_framework.permissions import IsAuthenticated
 
 from app.services import todo_create
-from app.selectors import todo_list
+from app.selectors import todo_list, todo_get
 from app.models import Todo
 
-from api_helpers.mixins import ApiErrorsMixin
 from api_helpers.pagination import get_paginated_response, LimitOffsetPagination
 
 
-class TodoListApi(ApiErrorsMixin, APIView):
+class TodoListApi(APIView):
     permission_classes = [IsAuthenticated]
 
     class Pagination(LimitOffsetPagination):
@@ -31,7 +33,6 @@ class TodoListApi(ApiErrorsMixin, APIView):
 
     def get(self, request):
         todos = todo_list(user_id=request.user.id)
-        # data = self.OutputSerializer(todos, many=True).data
 
         return get_paginated_response(
             pagination_class=self.Pagination,
@@ -40,7 +41,6 @@ class TodoListApi(ApiErrorsMixin, APIView):
             request=request,
             view=self
         )
-
 
 
 class TodoCreateApi(APIView):
@@ -59,3 +59,23 @@ class TodoCreateApi(APIView):
         todo_create(user_id=user_id, **serializer.validated_data)
 
         return Response(status=status.HTTP_201_CREATED)
+
+
+class TodoDetailApi(APIView, ApiErrorsMixin):
+    permission_classes = [IsAuthenticated]
+
+    class OutputSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Todo
+            fields = (
+                'id',
+                'title',
+                'description',
+                'created_at',
+                'is_done'
+            )
+
+    def get(self, request, todo_id):
+        todo = todo_get(fetched_by=request.user, todo_id=todo_id)
+        serializer = self.OutputSerializer(todo)
+        return Response(serializer.data)
