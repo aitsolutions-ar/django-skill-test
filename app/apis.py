@@ -4,8 +4,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api_helpers.mixins import ApiErrorsMixin
-
 from app.models import Todo
 from app.services import (
     todo_create,
@@ -52,7 +50,7 @@ class TodoListApi(APIView):
         )
 
 
-class TodoCreateApi(APIView, ApiErrorsMixin):
+class TodoCreateApi(APIView):
     permission_classes = [IsAuthenticated]
 
     class InputSerializer(serializers.Serializer):
@@ -72,7 +70,7 @@ class TodoCreateApi(APIView, ApiErrorsMixin):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class TodoDetailApi(APIView, ApiErrorsMixin):
+class TodoDetailApi(APIView):
     permission_classes = [IsAuthenticated]
 
     class OutputSerializer(serializers.ModelSerializer):
