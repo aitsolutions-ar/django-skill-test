@@ -1,6 +1,7 @@
 from app.models import Todo
 from app.selectors import user_get, todo_get
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 def todo_create(
@@ -9,12 +10,14 @@ def todo_create(
     title: str,
     description:str,
     is_done: bool,
+    completion_deadline: datetime
 ) -> Todo:
     current_user = user_get(id=user_id)
     todo = Todo(title=title,
                 description=description,
                 is_done=is_done,
-                user=current_user
+                user=current_user,
+                completion_deadline=completion_deadline
                 )
     todo.full_clean()
     todo.save()

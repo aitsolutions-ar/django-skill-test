@@ -28,7 +28,8 @@ class TodoListApi(APIView):
                 'title',
                 'description',
                 'created_at',
-                'is_done'
+                'is_done',
+                'completion_deadline'
             )
 
     def get(self, request):
@@ -51,6 +52,8 @@ class TodoCreateApi(APIView):
         description = serializers.CharField()
         is_done = serializers.BooleanField(required=False,
                                            default=False)
+        completion_deadline = serializers.DateTimeField(required=False,
+                                                        default=None)
 
     def post(self, request):
         serializer = self.InputSerializer(data=request.data)
@@ -72,7 +75,8 @@ class TodoDetailApi(APIView, ApiErrorsMixin):
                 'title',
                 'description',
                 'created_at',
-                'is_done'
+                'is_done',
+                'completion_deadline'
             )
 
     def get(self, request, todo_id):

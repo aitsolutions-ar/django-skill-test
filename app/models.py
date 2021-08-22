@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
 class Todo(models.Model):
     title = models.CharField(
@@ -19,4 +20,8 @@ class Todo(models.Model):
     )
     created_at = models.DateTimeField(
         default=timezone.now
+    )
+    completion_deadline = models.DateTimeField(
+        blank=True,
+        null=True
     )
