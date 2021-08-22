@@ -15,30 +15,9 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path, include
-from app.apis import (
-    TodoCreateApi,
-    TodoDeleteApi,
-    TodoDetailApi,
-    TodoListApi,
-    TodoUpdateApi
-)
-from users.apis import UserCreateApi
-
-
-todo_patterns = [
-    path('', TodoListApi.as_view(), name='list'),
-    path('create/', TodoCreateApi.as_view(), name='create'),
-    path('<int:todo_id>/', TodoDetailApi.as_view(), name='detail'),
-    path('<int:todo_id>/update', TodoUpdateApi.as_view(), name='update'),
-    path('<int:todo_id>/delete', TodoDeleteApi.as_view(), name='delete'),
-]
-
-user_patterns = [
-    path('register/', UserCreateApi.as_view(), name='register-user')
-]
 
 urlpatterns = [
-    path('todos/', include((todo_patterns, 'todos'))),
-    path('users/', include((user_patterns, 'users'))),
-    path('api-auth/', include('rest_framework.urls')),
+    path('todos/', include('app.urls')),
+    path('users/', include('users.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
