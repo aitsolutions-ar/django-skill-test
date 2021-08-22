@@ -32,3 +32,12 @@ def todo_markasdone(
     todo.full_clean()
     todo.save()
     return todo
+
+
+def todo_delete(
+    *,
+    fetched_by: User,
+    todo_id: int
+) -> Todo:
+    todo = todo_get(fetched_by=fetched_by, todo_id=todo_id)
+    todo.delete()

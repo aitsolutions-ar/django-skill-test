@@ -7,7 +7,7 @@ from api_helpers.mixins import ApiErrorsMixin
 
 from rest_framework.permissions import IsAuthenticated
 
-from app.services import todo_create, todo_markasdone
+from app.services import todo_create, todo_markasdone, todo_delete
 from app.selectors import todo_list, todo_get
 from app.models import Todo
 
@@ -89,7 +89,14 @@ class TodoUpdateApi(APIView):
 
     def post(self, request, todo_id):
         serializer = self.InputSerializer(data=request.data)
-        print(request.user)
         serializer.is_valid(raise_exception=True)
         todo_markasdone(fetched_by=request.user, todo_id=todo_id, **serializer.validated_data)
+        return Response(status=status.HTTP_200_OK)
+
+
+class TodoDeleteApi(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, todo_id):
+        todo_delete(fetched_by=request.user, todo_id=todo_id)
         return Response(status=status.HTTP_200_OK)

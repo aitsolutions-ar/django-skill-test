@@ -19,7 +19,8 @@ from app.apis import(
     TodoListApi,
     TodoCreateApi,
     TodoDetailApi,
-    TodoUpdateApi
+    TodoUpdateApi,
+    TodoDeleteApi
 )
 
 todo_patterns = [
@@ -27,6 +28,7 @@ todo_patterns = [
     path('create/', TodoCreateApi.as_view(), name='create'),
     path('<int:todo_id>/', TodoDetailApi.as_view(), name='detail'),
     path('<int:todo_id>/update', TodoUpdateApi.as_view(), name='update'),
+    path('<int:todo_id>/delete', TodoDeleteApi.as_view(), name='delete'),
 ]
 
 
