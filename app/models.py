@@ -8,7 +8,7 @@ class Todo(models.Model):
     )
     description = models.CharField(
         max_length=128,
-        null=True
+        null=False
     )
     is_done = models.BooleanField(
         default=False
@@ -16,5 +16,7 @@ class Todo(models.Model):
     user = models.ForeignKey(
         'auth.User',
         on_delete=models.DO_NOTHING,
-        null=True
+        null = True,
+        blank = True
     )
+   
