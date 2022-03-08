@@ -9,9 +9,9 @@
                     <th> Numero </th>
                     <th> Nombre </th>
                     <th> Descripción</th>
+                    <th> Fecha </th>
                     <th> Realizado? </th>
                     <th> JSON </th>
-
                 </tr>
                 {% for i in items %}
                     <tr>
@@ -19,10 +19,12 @@
                         {% if i.is_done %}
                             <td style="text-decoration:line-through;"> {{i.title}} </td>
                             <td style="text-decoration:line-through;"> {{i.description}} </td>
+                            <td style="text-decoration:line-through;"> {{i.time}} </td>
                             <td> <p style="color:green;"> &#10003; </p> </td>
                         {% else %}
                             <td> {{i.title}} </td>
                             <td> {{i.description}} </td>
+                            <td> {{i.time}} </td>
                             <td> 
                                 <a href="/app/update/{{i.id}}"> Finalizada </a> 
                             </td>

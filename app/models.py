@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 
@@ -19,5 +20,7 @@ class Todo(models.Model):
         null = True,
         blank = True
     )
-    
+    time = models.DateTimeField(
+        default= datetime.datetime.now
+    )
    

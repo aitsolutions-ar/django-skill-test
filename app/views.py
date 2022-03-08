@@ -1,9 +1,18 @@
 from ast import Is
 from asyncio import tasks
 from pyexpat import model
+from time import time
+from turtle import title
 from django.http import HttpResponseRedirect
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormView
+
+from django.urls import reverse_lazy
 from app.forms import TodoForm
 from rest_framework import viewsets
 from .models import Todo
@@ -25,7 +34,7 @@ class TodoViewset(viewsets.ModelViewSet):
         return super().get_queryset().filter(user=self.request.user)
 
 def todo_view(request):
-    items = models.Todo.objects.filter(user = request.user)
+    items = models.Todo.objects.filter(user = request.user).order_by('-time')
     return render(request, "todo.html", {"items":items})
 
 def add_todo_view(request):
@@ -52,3 +61,23 @@ def update_todo_view(request, id):
                 return HttpResponseRedirect("/app/list/")
     return render(request, "update.html", {'form':form, 'task':todo})
     
+#6
+class TodoRegister(FormView):
+    template_name  = 'registro.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('Todo')
+
+    def form_valid(self, form):
+        user = form.save()
+        if user != None:
+            login(self.request, user)
+
+        return super(TodoRegister,self).form_valid(form)
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('/')
+
+        return self.render_to_response(self.get_context_data())
+
+
