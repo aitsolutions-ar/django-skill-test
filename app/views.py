@@ -51,7 +51,6 @@ def add_todo_view(request):
     return render(request, "form.html", {'form':form})
 
 def update_todo_view(request, id):
-    print(request.user.id)
     try:
         todo = Todo.objects.get(id=id)
     except ObjectDoesNotExist:
