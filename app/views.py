@@ -20,6 +20,7 @@ from .models import Todo
 from app import models
 from .serializers import TodoSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class TodoViewset(viewsets.ModelViewSet):
@@ -50,7 +51,13 @@ def add_todo_view(request):
     return render(request, "form.html", {'form':form})
 
 def update_todo_view(request, id):
-    todo = Todo.objects.get(id=id)
+    print(request.user.id)
+    try:
+        todo = Todo.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect("/app/registro/")
+    if not todo.user.id == request.user.id:
+        return HttpResponseRedirect("/app/registro/")
     form = TodoForm(request.POST or None, instance=todo)
     if todo.user == request.user:
         if request.method == "POST":
