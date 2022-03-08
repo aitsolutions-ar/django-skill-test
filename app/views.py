@@ -40,3 +40,16 @@ def add_todo_view(request):
             return HttpResponseRedirect('/app/list/')
 
     return render(request, "form.html", {'form':form})
+
+def update_todo_view(request, id):
+    todo = Todo.objects.get(id=id)
+    form = TodoForm(request.POST or None, instance=todo)
+    if todo.user == request.user:
+        if request.method == "POST":
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user = request.user
+                obj.save() 
+                return HttpResponseRedirect("/app/list/")
+    return render(request, "update.html", {'form':form, 'task':todo})
+    
