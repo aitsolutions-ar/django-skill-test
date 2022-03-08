@@ -19,4 +19,5 @@ class Todo(models.Model):
         null = True,
         blank = True
     )
+    
    

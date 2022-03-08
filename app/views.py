@@ -8,7 +8,6 @@ from app.forms import TodoForm
 from rest_framework import viewsets
 from .models import Todo
 
-
 from app import models
 from .serializers import TodoSerializer
 from rest_framework.permissions import IsAuthenticated
