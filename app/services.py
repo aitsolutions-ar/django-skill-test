@@ -12,13 +12,13 @@ def get_todos_for_user(user):
 def create_todo(title, description, user, deadline=None):
     return Todo.objects.create(title=title, description=description, user=user, deadline=deadline)
 
-def update_todo(todo, title=None, description=None, completed=None, deadline=None):
+def update_todo(todo, title=None, description=None, is_done=None, deadline=None):
     if title:
         todo.title = title
     if description:
         todo.description = description
-    if completed is not None:
-        todo.completed = completed
+    if is_done is not None:
+        todo.is_done = is_done
     if deadline:
         todo.deadline = deadline
     todo.save()
