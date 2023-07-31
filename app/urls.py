@@ -1,11 +1,8 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TodoViewset
+from django.urls import path
+from .views import TodoListCreateView, TodoRetrieveUpdateDeleteView
 
-router = DefaultRouter()
-
-router.register('', TodoViewset)
 
 urlpatterns = [
-    path('todos/', include(router.urls))
+    path('todos/', TodoListCreateView.as_view(), name='todo-list-create'),
+    path('todos/<int:pk>/', TodoRetrieveUpdateDeleteView.as_view(), name='todo-retrieve-update-delete'),
 ]
