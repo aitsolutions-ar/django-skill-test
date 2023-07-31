@@ -8,6 +8,7 @@ class Todo(models.Model):
     )
     description = models.CharField(
         max_length=128,
+        blank=True,
         null=True
     )
     is_done = models.BooleanField(
@@ -23,3 +24,9 @@ class Todo(models.Model):
         User,
         on_delete=models.CASCADE
     )
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title + ' - ' + self.user.username
